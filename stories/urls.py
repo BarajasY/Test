@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.Index, name="index"),
     path('allstories/', views.AllStories, name="stories"),
-    path('<int:story_id>/', views.StoryById, name="stories")
+    path('<int:story_id>/', views.StoryById, name="stories"),
+    path('post/', views.PostTest, name="stories")
 ]

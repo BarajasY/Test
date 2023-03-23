@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Story
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
@@ -19,5 +20,13 @@ def AllStories(request):
     return JsonResponse(AllStories, safe=False)
 
 def StoryById(request, story_id):
-    IdStory = dict(Story.objects.filter(pk = story_id))
+    IdStory = Story.objects.get(pk = story_id)
     return JsonResponse(IdStory, safe=False)
+"""     return HttpResponse(json.dumps(IdStory)) """
+
+@csrf_exempt
+def PostTest(request):
+    if request.method == 'POST':
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
+    return JsonResponse(body, safe=False)
